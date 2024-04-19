@@ -59,10 +59,10 @@ export default function Header() {
 	return (
 		<header
 			ref={headerRef}
-			className="bg-main-500 relative grid grid-cols-3 p-2 text-white shadow-md"
+			className="sticky top-0 z-50 grid grid-cols-3 bg-main-500 p-2 text-white shadow-md"
 		>
 			<button
-				className="hover:bg-main-100 focus:bg-main-100 z-10 justify-self-start rounded-sm px-1 transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+				className="justify-self-start rounded-sm px-1 transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 				aria-label="Menu"
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
 			>
@@ -72,7 +72,7 @@ export default function Header() {
 				animate={isMenuOpen ? "open" : "closed"}
 				variants={variants}
 				transition={{ duration: 0.2, ease: "easeInOut" }}
-				className={`bg-main-500 absolute left-0 top-full w-full bg-opacity-90 p-2 backdrop-blur-md ${
+				className={`absolute left-0 top-full w-full bg-main-500 bg-opacity-90 p-2 backdrop-blur-md ${
 					isMenuOpen ? "pointer-events-auto" : "pointer-events-none"
 				}`}
 			>
@@ -80,7 +80,7 @@ export default function Header() {
 					<li>
 						<Link
 							tabIndex={isMenuOpen ? 0 : -1}
-							className="bg-main-600 border-main-600 hover:bg-main-100 focus:bg-main-100 block rounded-sm border px-2 py-1 text-center font-medium transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/"
 						>
 							Home
@@ -89,7 +89,7 @@ export default function Header() {
 					<li>
 						<Link
 							tabIndex={isMenuOpen ? 0 : -1}
-							className="bg-main-600 border-main-600 hover:bg-main-100 focus:bg-main-100 block rounded-sm border px-2 py-1 text-center font-medium transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/cards"
 						>
 							Cards
@@ -98,7 +98,7 @@ export default function Header() {
 					<li>
 						<Link
 							tabIndex={isMenuOpen ? 0 : -1}
-							className="bg-main-600 border-main-600 hover:bg-main-100 focus:bg-main-100 block rounded-sm border px-2 py-1 text-center font-medium transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/sets"
 						>
 							Sets
@@ -107,7 +107,7 @@ export default function Header() {
 					<li>
 						<Link
 							tabIndex={isMenuOpen ? 0 : -1}
-							className="bg-main-600 border-main-600 hover:bg-main-100 focus:bg-main-100 block rounded-sm border px-2 py-1 text-center font-medium transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/banlist"
 						>
 							Banlist
@@ -116,7 +116,7 @@ export default function Header() {
 					<li>
 						<Link
 							tabIndex={isMenuOpen ? 0 : -1}
-							className="bg-main-600 border-main-600 hover:bg-main-100 focus:bg-main-100 block rounded-sm border px-2 py-1 text-center font-medium transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/archetypes"
 						>
 							Archetypes
@@ -124,19 +124,19 @@ export default function Header() {
 					</li>
 				</ul>
 			</motion.nav>
-			<span className="z-10 justify-self-center text-lg font-bold">
+			<span className="justify-self-center text-lg font-bold">
 				DeckVault
 			</span>
-			<div className="z-10 flex gap-2 justify-self-end">
+			<div className=" flex gap-2 justify-self-end">
 				<button
-					className="hover:bg-main-100 focus:bg-main-100 z-10 rounded-sm px-1 transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+					className="rounded-sm px-1 transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 					aria-label="Search"
 					onClick={() => console.log("Search clicked")}
 				>
 					<Search />
 				</button>
 				<button
-					className="hover:bg-main-100 focus:bg-main-100 z-10 rounded-sm px-1 transition-all hover:bg-opacity-10 focus:bg-opacity-10"
+					className="rounded-sm px-1 transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 					aria-label="User"
 					onClick={() => console.log("User clicked")}
 				>
