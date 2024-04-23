@@ -5,6 +5,7 @@ export interface SetInterface {
 	cards_amount: number;
 }
 
-export interface SetsByDateInterface {
-	[key: string]: SetInterface[];
+export interface SetsByYearInterface {
+	year: number;
+	sets: SetInterface[];
 }

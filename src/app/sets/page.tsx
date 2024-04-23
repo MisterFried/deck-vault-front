@@ -1,4 +1,5 @@
 // ** Import core packages
+import Link from "next/link";
 
 // ** Import third party
 
@@ -25,7 +26,7 @@
 // ** Import styles
 
 // ** Import Types
-import { SetInterface, SetsByDateInterface } from "../types/sets.interface";
+import { SetInterface, SetsByYearInterface } from "../types/sets.interface";
 
 /**
  * Retrieves a list of sets from the server and organizes them by year group.
@@ -38,21 +39,28 @@ async function getSets() {
 
 	const sets: SetInterface[] = await response.json();
 
-	// Organize sets by year group
-	const setsByDate: SetsByDateInterface = {};
+	// Convert date string to Date object
 	sets.forEach(set => {
-		const year = new Date(set.date).getFullYear();
-
-		if (!setsByDate[year]) setsByDate[year] = [];
-		setsByDate[year].push(set);
+		set.date = new Date(set.date);
 	});
 
-	return setsByDate;
+	// Sort sets by date
+	sets.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+	// Organize sets by year group
+	const setsByYear: SetsByYearInterface[] = [];
+	sets.forEach(set => {
+		const year = set.date.getUTCFullYear();
+		const yearGroup = setsByYear.find(group => group.year === year);
+		if (yearGroup) yearGroup.sets.push(set);
+		else setsByYear.push({ year, sets: [set] });
+	});
+
+	return setsByYear;
 }
 
-// TODO : Order sets by date in year group
 /**
- * Renders a page listing all the YuGiOh TCG sets organized by year group.
+ * Renders a page listing all the YuGiOh TCG sets organized by year group from most recent to oldest.
  *
  * @returns The sets page component.
  */
@@ -67,26 +75,31 @@ export default async function Sets() {
 				Click on a year to see the sets in that year.
 			</p>
 
-			<section className="flex flex-col gap-4">
-				{Object.entries(sets).map(([year, sets]) => (
+			<section className="grid grid-cols-1 border-t border-main-500">
+				{sets.map(({ year, sets }) => (
 					<details
 						key={year}
-						className="rounded-sm border border-main-500 p-2"
+						className="border-b border-l border-r border-main-600 p-2"
 					>
-						<summary className="font-medium">{year}</summary>
+						<summary className="cursor-pointer font-medium">
+							{year}
+						</summary>
 						<div className="flex flex-col gap-2">
 							{sets.map((set, index) => (
 								<article
-									className="grid grid-cols-[1fr_auto] rounded-sm border border-main-300 p-1"
+									className="grid grid-cols-[1fr_auto] rounded-sm border border-main-300 bg-main-50 p-1 shadow-md"
 									key={`${set.code}-${index}`}
 								>
-									<span className="justify-self-start text-lg font-medium">
+									<Link
+										href={`/sets/${set.code}`}
+										className="justify-self-start text-lg font-medium"
+									>
 										{set.name}
-									</span>
+									</Link>
 									<span className="justify-self-end text-sm font-light">
 										{set.code}
 									</span>
-									<span className="justify-self-start text-sm font-light">{`${new Date(set.date).getDay()}/${new Date(set.date).getMonth()}/${new Date(set.date).getFullYear()}`}</span>
+									<span className="justify-self-start text-sm font-light">{`${set.date.getUTCDate()}/${set.date.getUTCMonth() + 1}/${set.date.getUTCFullYear()}`}</span>
 									<span className="justify-self-end text-sm font-semibold">
 										{set.cards_amount} cards
 									</span>
