@@ -1,5 +1,6 @@
 // ** Import core packages
 import Image from "next/image";
+import Link from "next/link";
 
 // ** Import third party
 
@@ -170,7 +171,11 @@ export default async function Set({ params }: { params: { code: string } }) {
 						)}
 						<div className="grid grid-cols-4 gap-x-2 gap-y-4">
 							{variant.cards.map((card, index) => (
-								<div key={index} className="flex flex-col">
+								<Link
+									href={`/cards/${encodeURIComponent(card.name.toLowerCase().replaceAll(" ", "_"))}`}
+									key={index}
+									className="flex flex-col"
+								>
 									<Image
 										src={cardPlaceholder}
 										alt={card.name}
@@ -178,7 +183,7 @@ export default async function Set({ params }: { params: { code: string } }) {
 									<span className="text-xs font-light">
 										{card.name}
 									</span>
-								</div>
+								</Link>
 							))}
 						</div>
 					</article>

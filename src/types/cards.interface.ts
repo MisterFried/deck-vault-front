@@ -15,3 +15,16 @@ export interface CardInterface {
 	rarity: string;
 	code: string;
 }
+
+export interface CardInterfaceWithPrints extends CardInterface {
+	prints: PrintInterface[];
+}
+
+export interface PrintInterface {
+	id: number;
+	rarity: string;
+	code: string;
+	set_name: string;
+	set_code: string;
+	set_date: Date;
+}
