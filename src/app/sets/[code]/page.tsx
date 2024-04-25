@@ -27,11 +27,11 @@ import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/app/types/cards.interface";
+import { CardInterface } from "@/types/cards.interface";
 import {
 	FullSetBreakdownInterface,
 	SetDetailsInterface,
-} from "@/app/types/sets.interface";
+} from "@/types/sets.interface";
 
 /**
  * Retrieves set details from the server based on the provided code.

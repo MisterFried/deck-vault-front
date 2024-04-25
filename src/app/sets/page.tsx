@@ -26,7 +26,7 @@ import Link from "next/link";
 // ** Import styles
 
 // ** Import Types
-import { SetInterface, SetsByYearInterface } from "../types/sets.interface";
+import { SetInterface, SetsByYearInterface } from "../../types/sets.interface";
 
 /**
  * Retrieves a list of sets from the server and organizes them by year group.
