@@ -86,12 +86,8 @@ export default async function Card({ params }: { params: { name: string } }) {
 								{cardDetails.atk !== null
 									? cardDetails.atk
 									: "?"}{" "}
-								/ DEF :{" "}
-								{cardDetails.def !== null
-									? cardDetails.def
-									: cardDetails.category.includes("Link")
-										? "-"
-										: "?"}
+								{!cardDetails.category.includes("Link") &&
+									`DEF : ${cardDetails.def !== null ? cardDetails.def : "?"}`}
 							</span>
 						)}
 						{cardDetails.link && (
