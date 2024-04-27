@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 // ** Import third party
-import { Menu, Search, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 // ** Import pages
@@ -25,6 +24,7 @@ import { motion } from "framer-motion";
 // ** Import assets
 
 // ** Import icons
+import { Menu, Search, User } from "lucide-react";
 
 // ** Import config
 
@@ -129,9 +129,9 @@ export default function Header() {
 					</li>
 				</ul>
 			</motion.nav>
-			<span className="justify-self-center text-lg font-bold">
+			<Link href="/" className="justify-self-center text-lg font-bold">
 				DeckVault
-			</span>
+			</Link>
 			<div className=" flex gap-2 justify-self-end">
 				<button
 					className="rounded-sm px-1 transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
