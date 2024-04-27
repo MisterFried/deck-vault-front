@@ -82,6 +82,7 @@ export default function Header() {
 							tabIndex={isMenuOpen ? 0 : -1}
 							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/"
+							onClick={() => setIsMenuOpen(false)}
 						>
 							Home
 						</Link>
@@ -91,6 +92,7 @@ export default function Header() {
 							tabIndex={isMenuOpen ? 0 : -1}
 							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/cards"
+							onClick={() => setIsMenuOpen(false)}
 						>
 							Cards
 						</Link>
@@ -100,6 +102,7 @@ export default function Header() {
 							tabIndex={isMenuOpen ? 0 : -1}
 							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/sets"
+							onClick={() => setIsMenuOpen(false)}
 						>
 							Sets
 						</Link>
@@ -109,6 +112,7 @@ export default function Header() {
 							tabIndex={isMenuOpen ? 0 : -1}
 							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/banlist"
+							onClick={() => setIsMenuOpen(false)}
 						>
 							Banlist
 						</Link>
@@ -118,6 +122,7 @@ export default function Header() {
 							tabIndex={isMenuOpen ? 0 : -1}
 							className="block rounded-sm border border-main-600 bg-main-600 px-2 py-1 text-center font-medium transition-all hover:bg-main-100 hover:bg-opacity-10 focus:bg-main-100 focus:bg-opacity-10"
 							href="/archetypes"
+							onClick={() => setIsMenuOpen(false)}
 						>
 							Archetypes
 						</Link>
