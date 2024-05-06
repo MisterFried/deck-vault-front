@@ -28,16 +28,15 @@ import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
 // ** Import styles
 
 // ** Import Types
-import { CardInterfaceWithPrints } from "@/types/cards.interface";
+import { CardWithPrintsInterface } from "@/types/cards.interface";
 
 // TODO : Separate card info and card print in different components
-// ! Cards with 0 ATK or DEf are stored with null values in BD, need investigation
 async function getCardInfo(name: string) {
 	// Get card details
 	const response = await fetch(`http://localhost:3000/cards/search/${name}`);
 	if (!response.ok) throw new Error(response.statusText);
 
-	const cardDetails: CardInterfaceWithPrints = await response.json();
+	const cardDetails: CardWithPrintsInterface = await response.json();
 
 	// Convert prints date from string to Date object
 	cardDetails.prints.forEach(print => {

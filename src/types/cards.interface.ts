@@ -18,3 +18,16 @@ export interface SetCardInterface extends CardInterface {
 	code: string;
 	rarity: Array<string>;
 }
+
+export interface CardPrintInterface {
+	id: number;
+	rarity: string;
+	code: string;
+	set_name: string;
+	set_code: string;
+	set_date: Date;
+}
+
+export interface CardWithPrintsInterface extends CardInterface {
+	prints: CardPrintInterface[]
+}
