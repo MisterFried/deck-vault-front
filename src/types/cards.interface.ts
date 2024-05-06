@@ -12,19 +12,9 @@ export interface CardInterface {
 	link: null | number;
 	scale: null | number;
 	banlist: "Unlimited" | "Limited" | "Semi-limited" | "Banned";
-	rarity: string;
-	code: string;
 }
 
-export interface CardInterfaceWithPrints extends CardInterface {
-	prints: PrintInterface[];
-}
-
-export interface PrintInterface {
-	id: number;
-	rarity: string;
+export interface SetCardInterface extends CardInterface {
 	code: string;
-	set_name: string;
-	set_code: string;
-	set_date: Date;
+	rarity: Array<string>;
 }

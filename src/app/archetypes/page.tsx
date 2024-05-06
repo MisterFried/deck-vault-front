@@ -8,7 +8,7 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
-import ScrollTopButton from "@/components/ScrollTopButton";
+import ScrollTopButton from "@/components/globalLayout/ScrollTopButton";
 
 // ** Import state manager
 

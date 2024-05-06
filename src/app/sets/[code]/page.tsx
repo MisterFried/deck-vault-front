@@ -1,6 +1,4 @@
 // ** Import core packages
-import Image from "next/image";
-import Link from "next/link";
 
 // ** Import third party
 
@@ -9,6 +7,7 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
+import SetCardFeed from "@/components/setCardFeed/SetCardFeed";
 
 // ** Import state manager
 
@@ -19,7 +18,6 @@ import Link from "next/link";
 // ** Import utils / lib
 
 // ** Import assets
-import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
 
 // ** Import icons
 
@@ -28,10 +26,9 @@ import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
 import {
-	FullSetBreakdownInterface,
-	SetDetailsInterface,
+	SetBreakdownInterface,
+	SetVariantInterface,
 } from "@/types/sets.interface";
 
 /**
@@ -44,35 +41,29 @@ async function getSetInfo(code: string) {
 	const response = await fetch(`http://localhost:3000/sets/${code}`);
 	if (!response.ok) throw new Error(response.statusText);
 
-	const setDetails: SetDetailsInterface[] = await response.json();
+	// Array with details for each set's variants
+	const setVariants: SetVariantInterface[] = await response.json();
+	console.log(setVariants);
 
-	setDetails.forEach(set => {
+	setVariants.forEach(variant => {
 		// Convert date string to Date object
-		set.set_date = new Date(set.set_date);
-
-		// Regroup cards with multiple prints due to rarity
-		const cardsList: CardInterface[] = [];
-		set.cards.forEach(card => {
-			const index = cardsList.findIndex(c => c.name === card.name);
-			if (index === -1) cardsList.push(card);
-		});
-		set.cards = cardsList;
+		variant.date = new Date(variant.date);
 	});
 
 	let mainVariant = 0;
 	// If the set has multiple variants, set the main one to the one with the shortest name
 	// Most of the time it will be the correct one (e.g. with "Alternate Art", "Tourment Prizes", etc.)
 	// (used to define the name and date of the set in the full breakdown)
-	if (setDetails.length > 1) {
-		setDetails.forEach((set, index) => {
-			if (set.set_name.length < setDetails[mainVariant].set_name.length)
+	if (setVariants.length > 1) {
+		setVariants.forEach((variant, index) => {
+			if (variant.name.length < setVariants[mainVariant].name.length)
 				mainVariant = index;
 		});
 	}
 
 	// Sort cards by their code
-	setDetails.forEach(set => {
-		set.cards.sort((a, b) => {
+	setVariants.forEach(variant => {
+		variant.cards.sort((a, b) => {
 			const AIndex = Number(a.code.slice(-3));
 			const BIndex = Number(b.code.slice(-3));
 			if (AIndex < BIndex) return -1;
@@ -82,18 +73,17 @@ async function getSetInfo(code: string) {
 	});
 
 	// Order the variants by name length
-	const variants: SetDetailsInterface[] = [];
-	setDetails.forEach(set => variants.push(set));
-	variants.sort((a, b) => a.set_name.length - b.set_name.length);
+	setVariants.sort((a, b) => b.name.length - a.name.length);
 
-	const fullSetBreakdown: FullSetBreakdownInterface = {
-		name: setDetails[mainVariant].set_name,
-		date: setDetails[mainVariant].set_date,
-		code: setDetails[mainVariant].set_code,
-		variants: variants,
+	// Create a full set breakdown object with the global set details and the sorted variants list
+	const setBreakdown: SetBreakdownInterface = {
+		name: setVariants[mainVariant].name,
+		date: setVariants[mainVariant].date,
+		code: setVariants[mainVariant].code,
+		variants: setVariants,
 	};
 
-	return fullSetBreakdown;
+	return setBreakdown;
 }
 
 /**
@@ -103,16 +93,16 @@ async function getSetInfo(code: string) {
  * @return The JSX element representing the detailed view of the set.
  */
 export default async function Set({ params }: { params: { code: string } }) {
-	const fullSetBreakdown = await getSetInfo(params.code);
+	const setBreakdown = await getSetInfo(params.code);
 
 	return (
 		<main className="flex grow flex-col gap-8 p-2">
 			<section className="flex flex-col">
-				<h1 className="text-2xl font-bold">{fullSetBreakdown.name}</h1>
+				<h1 className="text-2xl font-bold">{setBreakdown.name}</h1>
 				<div className="flex justify-between gap-2">
-					<span className="text-sm font-light">{`${fullSetBreakdown.date.getUTCDate()}/${fullSetBreakdown.date.getUTCMonth() + 1}/${fullSetBreakdown.date.getUTCFullYear()}`}</span>
+					<span className="text-sm font-light">{`${setBreakdown.date.getUTCDate()}/${setBreakdown.date.getUTCMonth() + 1}/${setBreakdown.date.getUTCFullYear()}`}</span>
 					<span className="text-sm font-light">
-						{fullSetBreakdown.code}
+						{setBreakdown.code}
 					</span>
 				</div>
 				<p className="mt-4 text-sm">
@@ -128,7 +118,7 @@ export default async function Set({ params }: { params: { code: string } }) {
 					Perferendis.
 				</p>
 			</section>
-			{fullSetBreakdown.variants.length > 1 && (
+			{setBreakdown.variants.length > 1 && (
 				<section className="flex flex-col">
 					<h2 className="text-xl font-semibold">Variants</h2>
 					<p className="mb-2 text-sm font-light">
@@ -136,15 +126,13 @@ export default async function Set({ params }: { params: { code: string } }) {
 						below for details.
 					</p>
 					<div className="flex flex-col">
-						{fullSetBreakdown.variants.map((set, index) => (
+						{setBreakdown.variants.map((set, index) => (
 							<div
-								key={`${set.set_code}-${index}`}
+								key={`${set.code}-${index}`}
 								className="grid grid-cols-[1fr_auto]"
 							>
-								<span className="font-medium">
-									{set.set_name}
-								</span>
-								<span className="text-sm font-light">{`${set.set_date.getUTCDate()}/${set.set_date.getUTCMonth() + 1}/${set.set_date.getUTCFullYear()}`}</span>
+								<span className="font-medium">{set.name}</span>
+								<span className="text-sm font-light">{`${set.date.getUTCDate()}/${set.date.getUTCMonth() + 1}/${set.date.getUTCFullYear()}`}</span>
 							</div>
 						))}
 					</div>
@@ -153,39 +141,23 @@ export default async function Set({ params }: { params: { code: string } }) {
 			<section className="flex flex-col gap-1">
 				<div className="flex justify-between">
 					<h2 className="text-xl font-semibold">Cards</h2>
-					{fullSetBreakdown.variants.length === 1 && (
+					{setBreakdown.variants.length === 1 && (
 						<span className="text-sm font-light">
-							Total : {fullSetBreakdown.variants[0].cards.length}
+							Total : {setBreakdown.variants[0].cards.length}
 						</span>
 					)}
 				</div>
-				{fullSetBreakdown.variants.map((variant, index) => (
+				{setBreakdown.variants.map((variant, index) => (
 					<article key={index} className="mb-16 last:mb-0">
-						{fullSetBreakdown.variants.length > 1 && (
+						{setBreakdown.variants.length > 1 && (
 							<div className="flex justify-between">
-								<h3>{variant.set_name}</h3>
+								<h3>{variant.name}</h3>
 								<span className="text-sm font-light">
 									Total : {variant.cards.length}
 								</span>
 							</div>
 						)}
-						<div className="grid grid-cols-4 gap-x-2 gap-y-4">
-							{variant.cards.map((card, index) => (
-								<Link
-									href={`/cards/${encodeURIComponent(card.name.toLowerCase().replaceAll(" ", "_"))}`}
-									key={index}
-									className="flex flex-col"
-								>
-									<Image
-										src={cardPlaceholder}
-										alt={card.name}
-									/>
-									<span className="text-xs font-light">
-										{card.name}
-									</span>
-								</Link>
-							))}
-						</div>
+						<SetCardFeed cards={variant.cards} />
 					</article>
 				))}
 			</section>

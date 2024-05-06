@@ -8,8 +8,8 @@ import type { Metadata } from "next";
 // ** Import sub pages / sections
 
 // ** Import components
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/globalLayout/Header";
+import Footer from "@/components/globalLayout/Footer";
 
 // ** Import state manager
 

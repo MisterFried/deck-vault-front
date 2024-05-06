@@ -1,4 +1,4 @@
-import { CardInterface } from "./cards.interface";
+import { SetCardInterface } from "./cards.interface";
 
 export interface SetInterface {
 	name: string;
@@ -12,16 +12,16 @@ export interface SetsByYearInterface {
 	sets: SetInterface[];
 }
 
-export interface SetDetailsInterface {
-	set_name: string;
-	set_code: string;
-	set_date: Date;
-	cards: CardInterface[];
+export interface SetVariantInterface {
+	name: string;
+	code: string;
+	date: Date;
+	cards: SetCardInterface[];
 }
 
-export interface FullSetBreakdownInterface {
+export interface SetBreakdownInterface {
 	name: string;
 	date: Date;
 	code: string;
-	variants: SetDetailsInterface[];
+	variants: SetVariantInterface[];
 }
