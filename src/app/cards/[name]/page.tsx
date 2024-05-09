@@ -96,7 +96,14 @@ export default async function Card({ params }: { params: { name: string } }) {
 							<span>Pendulum scale : {cardDetails.scale}</span>
 						)}
 						{cardDetails.archetype && (
-							<span>Archetype : {cardDetails.archetype}</span>
+							<span>
+								Archetype :{" "}
+								<Link
+									href={`/archetypes/${encodeURIComponent(cardDetails.archetype.toLowerCase().replaceAll(" ", "_"))}`}
+								>
+									{cardDetails.archetype}
+								</Link>
+							</span>
 						)}
 
 						<span className="flex grow items-end justify-end text-sm font-light">

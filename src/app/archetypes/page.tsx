@@ -66,7 +66,7 @@ export default async function Archetypes() {
 			<section className="grid grid-cols-1 border-t border-main-500">
 				{archetypes.map(archetype => (
 					<Link
-						href={`/archetypes/${archetype}`}
+						href={`/archetypes/${encodeURIComponent(archetype.toLowerCase().replaceAll(" ", "_"))}`}
 						key={archetype}
 						className="border-b border-l border-r border-main-600 p-2"
 					>
