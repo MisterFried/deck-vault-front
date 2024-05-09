@@ -69,7 +69,9 @@ export default function CardDisplay({ cards }: { cards: CardInterface[] }) {
 		);
 		setPaginatedCards(paginatedCards);
 		setTotalPages(Math.ceil(filteredCards.length / perPage));
-	}, [filteredCards, currentPage, perPage]);
+
+		if (currentPage > totalPages) setCurrentPage(totalPages);
+	}, [filteredCards, currentPage, perPage, totalPages]);
 
 	return (
 		<section className="flex flex-col gap-2">
