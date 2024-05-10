@@ -74,7 +74,7 @@ export default function CardDisplay({ cards }: { cards: CardInterface[] }) {
 	}, [filteredCards, currentPage, perPage, totalPages]);
 
 	return (
-		<section className="flex flex-col gap-2">
+		<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-md">
 			<CardFilter setFilter={setFilter} />
 			<PageController
 				currentPage={currentPage}

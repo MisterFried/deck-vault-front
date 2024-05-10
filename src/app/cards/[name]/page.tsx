@@ -55,8 +55,8 @@ export default async function Card({ params }: { params: { name: string } }) {
 	const cardDetails = await getCardInfo(params.name);
 
 	return (
-		<main className="flex grow flex-col gap-8 p-2">
-			<section className="flex flex-col gap-4">
+		<main className="flex grow flex-col gap-4 p-2">
+			<section className="flex flex-col gap-4 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h1 className="text-2xl font-bold">{cardDetails.name}</h1>
 				<div className="grid grid-cols-2 gap-2">
 					<Image
@@ -99,6 +99,7 @@ export default async function Card({ params }: { params: { name: string } }) {
 							<span>
 								Archetype :{" "}
 								<Link
+									className="underline"
 									href={`/archetypes/${encodeURIComponent(cardDetails.archetype.toLowerCase().replaceAll(" ", "_"))}`}
 								>
 									{cardDetails.archetype}
@@ -113,17 +114,18 @@ export default async function Card({ params }: { params: { name: string } }) {
 				</div>
 				<p className="col-span-2">{cardDetails.description}</p>
 			</section>
-			<section>
+			<section className="rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h2 className="text-xl font-semibold">Prints</h2>
 				<p className="mb-6">
-					<b>{cardDetails.name}</b> has been print in{" "}
-					{cardDetails.prints.length} sets. More details below
+					<b className="font-semibold">{cardDetails.name}</b> has been
+					print in {cardDetails.prints.length} sets. More details
+					below
 				</p>
 				<div className="flex flex-col gap-2">
 					{cardDetails.prints.map(print => (
 						<article
 							key={print.id}
-							className="grid grid-cols-[1fr_auto] gap-x-2 rounded-sm border border-main-200 p-1 shadow-sm"
+							className="grid grid-cols-[1fr_auto] gap-x-2 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm"
 						>
 							<Link href={`/sets/${print.set_code}`}>
 								{print.set_name}

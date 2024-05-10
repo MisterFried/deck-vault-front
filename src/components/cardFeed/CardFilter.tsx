@@ -33,7 +33,7 @@ interface CardFilterProps {
 
 export default function CardFilter({ setFilter }: CardFilterProps) {
 	return (
-		<div className="flex gap-1 rounded-sm border border-main-300 px-2 py-1">
+		<div className="flex gap-1 rounded-sm border border-gray-400 bg-white px-2 py-1">
 			<input
 				name="search"
 				type="text"

@@ -38,8 +38,8 @@ import banlistImage from "/public/images/banlist.jpg";
  */
 export default function Home() {
 	return (
-		<main className="grow">
-			<section className="grid grid-cols-2 gap-2 p-2">
+		<main className="flex grow flex-col gap-4 p-2">
+			<section className="grid grid-cols-2 gap-2 ">
 				<NavigationCard
 					label="Cards"
 					href="/cards"
@@ -57,7 +57,7 @@ export default function Home() {
 					image={archetypesImage}
 				/>
 			</section>
-			<section className="flex flex-col gap-4 p-2">
+			<section className="flex flex-col gap-4 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h1 className="mb-2 text-2xl font-bold">Deck Vault</h1>
 				<p className="text-sm leading-4">
 					Welcome to DeckVault, your go-to YuGiOh card database!

@@ -43,7 +43,6 @@ async function getSetInfo(code: string) {
 
 	// Array with details for each set's variants
 	const setVariants: SetVariantInterface[] = await response.json();
-	console.log(setVariants);
 
 	setVariants.forEach(variant => {
 		// Convert date string to Date object
@@ -96,8 +95,8 @@ export default async function Set({ params }: { params: { code: string } }) {
 	const setBreakdown = await getSetInfo(params.code);
 
 	return (
-		<main className="flex grow flex-col gap-8 p-2">
-			<section className="flex flex-col">
+		<main className="flex grow flex-col gap-4 p-2">
+			<section className="flex flex-col rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h1 className="text-2xl font-bold">{setBreakdown.name}</h1>
 				<div className="flex justify-between gap-2">
 					<span className="text-sm font-light">{`${setBreakdown.date.getUTCDate()}/${setBreakdown.date.getUTCMonth() + 1}/${setBreakdown.date.getUTCFullYear()}`}</span>
@@ -119,7 +118,7 @@ export default async function Set({ params }: { params: { code: string } }) {
 				</p>
 			</section>
 			{setBreakdown.variants.length > 1 && (
-				<section className="flex flex-col">
+				<section className="flex flex-col rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 					<h2 className="text-xl font-semibold">Variants</h2>
 					<p className="mb-2 text-sm font-light">
 						Multiple variants of this sets exists. See the list
@@ -138,7 +137,7 @@ export default async function Set({ params }: { params: { code: string } }) {
 					</div>
 				</section>
 			)}
-			<section className="flex flex-col gap-1">
+			<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<div className="flex justify-between">
 					<h2 className="text-xl font-semibold">Cards</h2>
 					{setBreakdown.variants.length === 1 && (
@@ -148,10 +147,15 @@ export default async function Set({ params }: { params: { code: string } }) {
 					)}
 				</div>
 				{setBreakdown.variants.map((variant, index) => (
-					<article key={index} className="mb-16 last:mb-0">
+					<article
+						key={index}
+						className="mb-6 last:mb-0 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm"
+					>
 						{setBreakdown.variants.length > 1 && (
-							<div className="flex justify-between">
-								<h3>{variant.name}</h3>
+							<div className="mb-2 flex justify-between">
+								<h3 className="font-semibold">
+									{variant.name}
+								</h3>
 								<span className="text-sm font-light">
 									Total : {variant.cards.length}
 								</span>

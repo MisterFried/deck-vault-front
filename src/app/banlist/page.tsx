@@ -76,7 +76,7 @@ export default async function Banlist() {
 
 	return (
 		<main className="flex grow flex-col gap-4 p-2">
-			<section className="flex flex-col gap-2">
+			<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h1 className="text-2xl font-bold">Banlist</h1>
 				<p>
 					A list of all the banned, limited or semi-limited cards in

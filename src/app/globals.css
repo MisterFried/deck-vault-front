@@ -6,12 +6,30 @@ html {
 	scroll-behavior: smooth;
 }
 
+body {
+	--s: 17px; /* control the size*/
+	--c1: #ffffff;
+	--c2: #f6f5f4;
+
+	--g: var(--c2) -5% 5%, #0000 0 45%;
+	background:
+		linear-gradient(45deg, #0000 10%, var(--c1) 0 40%, #0000 0),
+		repeating-linear-gradient(45deg, var(--g)),
+		repeating-linear-gradient(-45deg, var(--g)) var(--c1);
+	background-size: var(--s) var(--s);
+}
+
+main {
+	max-width: 35rem;
+	margin-inline: auto;
+}
+
 details[open] summary {
 	margin-bottom: 1rem;
 }
 
 .banlistTab {
-	background-color: rgb(225, 225, 225);
+	background-color: rgb(240, 240, 240);
 }
 
 .banlistTab.active {

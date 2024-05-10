@@ -48,7 +48,7 @@ export default async function Cards() {
 
 	return (
 		<main className="flex grow flex-col gap-4 p-2">
-			<section className="flex flex-col">
+			<section className="flex flex-col rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h1 className="text-2xl font-bold">Cards</h1>
 				<p>
 					A detailed list of all the existing cards in the YuGiOh TCG.

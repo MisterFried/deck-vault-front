@@ -50,10 +50,10 @@ export default async function Archetypes() {
 
 	return (
 		<main className="flex grow flex-col gap-4 p-2">
-			<h1 className="text-2xl font-bold" id="archetypes">
-				Archetypes
-			</h1>
-			<section className="flex flex-col">
+			<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
+				<h1 className="text-2xl font-bold" id="archetypes">
+					Archetypes
+				</h1>
 				<p>
 					A detailed list of all the existing archetypes in the YuGiOh
 					TCG. Click on an archetypes to see the detailed list of
@@ -63,12 +63,12 @@ export default async function Archetypes() {
 					Note : a card can only be in one archetype
 				</p>
 			</section>
-			<section className="grid grid-cols-1 border-t border-main-500">
+			<section className="grid grid-cols-1 border-t border-gray-300 bg-white">
 				{archetypes.map(archetype => (
 					<Link
 						href={`/archetypes/${encodeURIComponent(archetype.toLowerCase().replaceAll(" ", "_"))}`}
 						key={archetype}
-						className="border-b border-l border-r border-main-600 p-2"
+						className="border-b border-l border-r border-gray-300 bg-white p-2"
 					>
 						{archetype}
 					</Link>

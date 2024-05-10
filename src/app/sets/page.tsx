@@ -69,17 +69,19 @@ export default async function Sets() {
 
 	return (
 		<main className="flex grow flex-col gap-4 p-2">
-			<h1 className="text-2xl font-bold">Sets</h1>
-			<p className="">
-				A detailed list of all the existing sets in the YuGiOh TCG.
-				Click on a year to see the sets in that year.
-			</p>
+			<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
+				<h1 className="text-2xl font-bold">Sets</h1>
+				<p className="">
+					A detailed list of all the existing sets in the YuGiOh TCG.
+					Click on a year to see the sets in that year.
+				</p>
+			</section>
 
-			<section className="grid grid-cols-1 border-t border-main-500">
+			<section className="grid grid-cols-1 overflow-hidden rounded-sm border-t border-gray-300 bg-white shadow-sm">
 				{sets.map(({ year, sets }) => (
 					<details
 						key={year}
-						className="border-b border-l border-r border-main-600 p-2"
+						className="border-b border-l border-r border-gray-300 bg-white p-2 shadow-sm"
 					>
 						<summary className="cursor-pointer font-medium">
 							{year}
@@ -87,7 +89,7 @@ export default async function Sets() {
 						<div className="flex flex-col gap-2">
 							{sets.map((set, index) => (
 								<article
-									className="grid grid-cols-[1fr_auto] rounded-sm border border-main-300 bg-main-50 p-1 shadow-md"
+									className="grid grid-cols-[1fr_auto] rounded-sm border border-gray-300 bg-gray-50 p-1 shadow-sm"
 									key={`${set.code}-${index}`}
 								>
 									<Link

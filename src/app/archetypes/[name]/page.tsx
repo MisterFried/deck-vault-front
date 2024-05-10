@@ -59,8 +59,8 @@ export default async function Archetype({
 	const archetypeName = cards[0].archetype;
 
 	return (
-		<main className="flex grow flex-col gap-8 p-2">
-			<section className="flex flex-col gap-4">
+		<main className="flex grow flex-col gap-4 p-2">
+			<section className="flex flex-col gap-4 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h1 className="text-2xl font-bold">{archetypeName}</h1>
 				<p>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -69,7 +69,7 @@ export default async function Archetype({
 					assumenda pariatur similique, aspernatur praesentium?
 				</p>
 			</section>
-			<section className="flex flex-col gap-2">
+			<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<h2 className="text-xl font-bold">Cards</h2>
 				<p>
 					List of all the cards that belongs in the {archetypeName}{" "}
