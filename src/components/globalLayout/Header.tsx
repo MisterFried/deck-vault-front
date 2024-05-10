@@ -47,7 +47,7 @@ export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const headerRef = useRef<HTMLElement | null>(null);
 
-	const [width, setWidth] = useState(window.innerWidth);
+	const [width, setWidth] = useState(0);
 
 	useEffect(() => {
 		window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -56,6 +56,8 @@ export default function Header() {
 	// On mobile devices, add an event listener to close the menu when the user clicks outside
 	// On desktop devices, always display the menu and remove the event listener
 	useEffect(() => {
+		if (width === 0) setWidth(window.innerWidth);
+
 		function handleOutsideClick(event: MouseEvent) {
 			if (!headerRef.current?.contains(event.target as Node)) {
 				setIsMenuOpen(false);
