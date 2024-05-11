@@ -1,5 +1,4 @@
 // ** Import core packages
-import Link from "next/link";
 
 // ** Import third party
 
@@ -8,6 +7,7 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
+import ArchetypeFeed from "@/components/ArchetypeFeed";
 
 // ** Import state manager
 
@@ -36,6 +36,8 @@ async function getArchetypes() {
 	const response = await fetch("http://localhost:3000/archetypes");
 	const archetypes: string[] = await response.json();
 
+	archetypes.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
 	return archetypes;
 }
 
@@ -62,17 +64,7 @@ export default async function Archetypes() {
 					Note : a card can only be in one archetype
 				</p>
 			</section>
-			<section className="grid grid-cols-1 border-t border-gray-300 bg-white">
-				{archetypes.map(archetype => (
-					<Link
-						href={`/archetypes/${encodeURIComponent(archetype.toLowerCase().replaceAll(" ", "_"))}`}
-						key={archetype}
-						className="border-b border-l border-r border-gray-300 bg-white p-2"
-					>
-						{archetype}
-					</Link>
-				))}
-			</section>
+			<ArchetypeFeed archetypes={archetypes} />
 		</main>
 	);
 }
