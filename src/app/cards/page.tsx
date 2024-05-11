@@ -8,7 +8,6 @@
 
 // ** Import components
 import CardDisplay from "@/components/cardFeed/CardDisplay";
-import ScrollTopButton from "@/components/globalLayout/ScrollTopButton";
 
 // ** Import state manager
 
@@ -57,7 +56,6 @@ export default async function Cards() {
 
 			<section>
 				<CardDisplay cards={cards} />
-				<ScrollTopButton />
 			</section>
 		</main>
 	);

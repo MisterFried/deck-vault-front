@@ -8,7 +8,6 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
-import ScrollTopButton from "@/components/globalLayout/ScrollTopButton";
 
 // ** Import state manager
 
@@ -74,7 +73,6 @@ export default async function Archetypes() {
 					</Link>
 				))}
 			</section>
-			<ScrollTopButton />
 		</main>
 	);
 }

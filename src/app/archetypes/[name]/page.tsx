@@ -8,7 +8,6 @@
 
 // ** Import components
 import CardDisplay from "@/components/cardFeed/CardDisplay";
-import ScrollTopButton from "@/components/globalLayout/ScrollTopButton";
 
 // ** Import state manager
 
@@ -77,7 +76,6 @@ export default async function Archetype({
 				</p>
 				<CardDisplay cards={cards} />
 			</section>
-			<ScrollTopButton />
 		</main>
 	);
 }

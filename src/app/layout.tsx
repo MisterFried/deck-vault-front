@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 // ** Import components
 import Header from "@/components/globalLayout/Header";
 import Footer from "@/components/globalLayout/Footer";
+import ScrollTopButton from "@/components/globalLayout/ScrollTopButton";
 
 // ** Import state manager
 
@@ -57,6 +58,7 @@ export default function RootLayout({
 				<Header />
 				{children}
 				<Footer />
+				<ScrollTopButton />
 			</body>
 		</html>
 	);
