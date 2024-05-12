@@ -1,8 +1,5 @@
-"use client";
-
 // ** Import core packages
 import Link from "next/link";
-import { useState } from "react";
 
 // ** Import third party
 
@@ -11,6 +8,7 @@ import { useState } from "react";
 // ** Import sub pages / sections
 
 // ** Import components
+import ArchetypeFeedInput from "./ArchetypeFeedInput";
 
 // ** Import state manager
 
@@ -42,26 +40,11 @@ export default function ArchetypeFeed({
 }: {
 	archetypes: string[];
 }) {
-	const [filteredArchetypes, setFilteredArchetypes] = useState(archetypes);
-
-	function handleFilter(filter: string) {
-		setFilteredArchetypes(
-			archetypes.filter(archetype =>
-				archetype.toLowerCase().includes(filter.toLowerCase())
-			)
-		);
-	}
-
 	return (
 		<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
-			<input
-				type="text"
-				className="w-full border border-gray-300 px-2 py-1"
-				placeholder="Search an archetype"
-				onChange={e => handleFilter(e.target.value)}
-			/>
+			<ArchetypeFeedInput />
 			<div className="grid grid-cols-1 border-t border-gray-300">
-				{filteredArchetypes.map(archetype => (
+				{archetypes.map(archetype => (
 					<Link
 						href={`/archetypes/${encodeURIComponent(archetype.toLowerCase().replaceAll(" ", "_"))}`}
 						key={archetype}

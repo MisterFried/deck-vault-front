@@ -29,25 +29,36 @@ import ArchetypeFeed from "@/components/ArchetypeFeed";
 
 /**
  * Retrieves the list of archetypes from the server.
+ * If provided with a search term, it will filter the list of archetypes.
  *
  * @return An array of archetype names.
  */
-async function getArchetypes() {
+async function getArchetypes(term: string) {
 	const response = await fetch("http://localhost:3000/archetypes");
 	const archetypes: string[] = await response.json();
 
 	archetypes.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-	return archetypes;
+	if (!term) return archetypes;
+
+	return archetypes.filter(archetype =>
+		archetype.toLowerCase().includes(term.toLowerCase())
+	);
 }
 
 /**
  * Renders the Archetypes page, which displays a list of archetypes from the YuGiOh TCG.
- *
+ * @param searchParams - The search term to filter the list of archetypes.
+ * 
  * @return The rendered Archetypes page.
  */
-export default async function Archetypes() {
-	const archetypes = await getArchetypes();
+export default async function Archetypes({
+	searchParams,
+}: {
+	searchParams?: { search?: string };
+}) {
+	const term = searchParams?.search ?? "";
+	const archetypes = await getArchetypes(term);
 
 	return (
 		<main className="flex grow flex-col gap-4 p-2">
