@@ -49,17 +49,6 @@ async function getSetInfo(code: string) {
 		variant.date = new Date(variant.date);
 	});
 
-	let mainVariant = 0;
-	// If the set has multiple variants, set the main one to the one with the shortest name
-	// Most of the time it will be the correct one (e.g. with "Alternate Art", "Tourment Prizes", etc.)
-	// (used to define the name and date of the set in the full breakdown)
-	if (setVariants.length > 1) {
-		setVariants.forEach((variant, index) => {
-			if (variant.name.length < setVariants[mainVariant].name.length)
-				mainVariant = index;
-		});
-	}
-
 	// Sort cards by their code
 	setVariants.forEach(variant => {
 		variant.cards.sort((a, b) => {
@@ -72,13 +61,13 @@ async function getSetInfo(code: string) {
 	});
 
 	// Order the variants by name length
-	setVariants.sort((a, b) => b.name.length - a.name.length);
+	setVariants.sort((a, b) => a.name.length - b.name.length);
 
 	// Create a full set breakdown object with the global set details and the sorted variants list
 	const setBreakdown: SetBreakdownInterface = {
-		name: setVariants[mainVariant].name,
-		date: setVariants[mainVariant].date,
-		code: setVariants[mainVariant].code,
+		name: setVariants[0].name,
+		date: setVariants[0].date,
+		code: setVariants[0].code,
 		variants: setVariants,
 	};
 
@@ -149,7 +138,7 @@ export default async function Set({ params }: { params: { code: string } }) {
 				{setBreakdown.variants.map((variant, index) => (
 					<article
 						key={index}
-						className="mb-6 last:mb-0 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm"
+						className="mb-6 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm last:mb-0"
 					>
 						{setBreakdown.variants.length > 1 && (
 							<div className="mb-2 flex justify-between">
