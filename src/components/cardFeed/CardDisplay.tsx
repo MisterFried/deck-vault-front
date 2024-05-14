@@ -71,6 +71,7 @@ export default function CardDisplay({ cards }: { cards: CardInterface[] }) {
 		setTotalPages(Math.ceil(filteredCards.length / perPage));
 
 		if (currentPage > totalPages) setCurrentPage(totalPages);
+		if (currentPage < 1 && totalPages > 0) setCurrentPage(1);
 	}, [filteredCards, currentPage, perPage, totalPages]);
 
 	return (
