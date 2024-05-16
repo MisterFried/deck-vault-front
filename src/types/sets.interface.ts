@@ -1,4 +1,8 @@
-import { SetCardInterface } from "./cards.interface";
+import {
+	SetMonsterCardInterface,
+	SetSpellCardInterface,
+	SetTrapCardInterface,
+} from "./cards.interface";
 
 export interface SetInterface {
 	name: string;
@@ -16,7 +20,11 @@ export interface SetVariantInterface {
 	name: string;
 	code: string;
 	date: Date;
-	cards: SetCardInterface[];
+	cards: (
+		| SetMonsterCardInterface
+		| SetSpellCardInterface
+		| SetTrapCardInterface
+	)[];
 }
 
 export interface SetBreakdownInterface {

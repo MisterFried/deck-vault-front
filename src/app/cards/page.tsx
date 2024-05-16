@@ -26,7 +26,7 @@ import CardDisplay from "@/components/cardFeed/CardDisplay";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import { MonsterCardInterface, SpellCardInterface, TrapCardInterface } from "@/types/cards.interface";
 
 /**
  * Retrieves the list of cards from the server.
@@ -37,7 +37,11 @@ async function getCards() {
 	const response = await fetch("http://localhost:3000/cards");
 	if (!response.ok) throw new Error(response.statusText);
 
-	const cards: CardInterface[] = await response.json();
+	const cards: (
+		| MonsterCardInterface
+		| SpellCardInterface
+		| TrapCardInterface
+	)[] = await response.json();
 
 	return cards;
 }

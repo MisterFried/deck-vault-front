@@ -26,7 +26,11 @@ import BanlistTabs from "@/components/BanlistTabs";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import {
+	MonsterCardInterface,
+	SpellCardInterface,
+	TrapCardInterface,
+} from "@/types/cards.interface";
 
 /**
  * Retrieves the list of banned, limited, and semi-limited cards from the server.
@@ -40,7 +44,11 @@ async function getBanlistCards() {
 	if (!bannedCardsResponse.ok)
 		throw new Error(bannedCardsResponse.statusText);
 
-	const bannedCards: CardInterface[] = await bannedCardsResponse.json();
+	const bannedCards: (
+		| MonsterCardInterface
+		| SpellCardInterface
+		| TrapCardInterface
+	)[] = await bannedCardsResponse.json();
 
 	const limitedCardsResponse = await fetch(
 		"http://localhost:3000/banlist/limited"
@@ -48,7 +56,11 @@ async function getBanlistCards() {
 	if (!limitedCardsResponse.ok)
 		throw new Error(limitedCardsResponse.statusText);
 
-	const limitedCards: CardInterface[] = await limitedCardsResponse.json();
+	const limitedCards: (
+		| MonsterCardInterface
+		| SpellCardInterface
+		| TrapCardInterface
+	)[] = await limitedCardsResponse.json();
 
 	const semiLimitedCardsResponse = await fetch(
 		"http://localhost:3000/banlist/semi-limited"
@@ -56,8 +68,11 @@ async function getBanlistCards() {
 	if (!semiLimitedCardsResponse.ok)
 		throw new Error(semiLimitedCardsResponse.statusText);
 
-	const semiLimitedCards: CardInterface[] =
-		await semiLimitedCardsResponse.json();
+	const semiLimitedCards: (
+		| MonsterCardInterface
+		| SpellCardInterface
+		| TrapCardInterface
+	)[] = await semiLimitedCardsResponse.json();
 
 	return {
 		banned: bannedCards,

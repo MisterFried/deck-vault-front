@@ -29,14 +29,30 @@ import CardFeed from "./cardFeed/CardFeed";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import {
+	MonsterCardInterface,
+	SpellCardInterface,
+	TrapCardInterface,
+} from "@/types/cards.interface";
 
 // ** Types
 interface BanlistTabsProps {
 	cards: {
-		banned: CardInterface[];
-		limited: CardInterface[];
-		semiLimited: CardInterface[];
+		banned: (
+			| MonsterCardInterface
+			| SpellCardInterface
+			| TrapCardInterface
+		)[];
+		limited: (
+			| MonsterCardInterface
+			| SpellCardInterface
+			| TrapCardInterface
+		)[];
+		semiLimited: (
+			| MonsterCardInterface
+			| SpellCardInterface
+			| TrapCardInterface
+		)[];
 	};
 }
 

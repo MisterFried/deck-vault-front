@@ -28,9 +28,17 @@ import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import {
+	MonsterCardInterface,
+	SpellCardInterface,
+	TrapCardInterface,
+} from "@/types/cards.interface";
 
-export default function CardLink({ card }: { card: CardInterface }) {
+export default function CardLink({
+	card,
+}: {
+	card: MonsterCardInterface | SpellCardInterface | TrapCardInterface;
+}) {
 	return (
 		<Link
 			href={`/cards/${encodeURIComponent(card.name.toLowerCase().replaceAll(" ", "_"))}`}

@@ -26,9 +26,17 @@ import CardLink from "@/components/CardLink";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import {
+	MonsterCardInterface,
+	SpellCardInterface,
+	TrapCardInterface,
+} from "@/types/cards.interface";
 
-export default function CardFeed({ cards }: { cards: CardInterface[] }) {
+export default function CardFeed({
+	cards,
+}: {
+	cards: (MonsterCardInterface | SpellCardInterface | TrapCardInterface)[];
+}) {
 	return (
 		<div className="grid grid-cols-4 gap-x-2 gap-y-4">
 			{cards.map(card => (

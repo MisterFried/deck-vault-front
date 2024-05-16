@@ -26,7 +26,11 @@ import CardDisplay from "@/components/cardFeed/CardDisplay";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import {
+	MonsterCardInterface,
+	SpellCardInterface,
+	TrapCardInterface,
+} from "@/types/cards.interface";
 
 /**
  * Retrieves the cards associated with a given archetype name from the server.
@@ -38,7 +42,11 @@ async function getArchetypeCards(name: string) {
 	const response = await fetch(`http://localhost:3000/archetypes/${name}`);
 	if (!response.ok) throw new Error(response.statusText);
 
-	const cards: CardInterface[] = await response.json();
+	const cards: (
+		| MonsterCardInterface
+		| SpellCardInterface
+		| TrapCardInterface
+	)[] = await response.json();
 
 	return cards;
 }

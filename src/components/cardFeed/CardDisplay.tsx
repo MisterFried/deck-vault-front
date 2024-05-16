@@ -30,9 +30,13 @@ import CardFeed from "@/components/cardFeed/CardFeed";
 // ** Import styles
 
 // ** Import Types
-import { CardInterface } from "@/types/cards.interface";
+import { MonsterCardInterface, SpellCardInterface, TrapCardInterface } from "@/types/cards.interface";
 
-export default function CardDisplay({ cards }: { cards: CardInterface[] }) {
+export default function CardDisplay({
+	cards,
+}: {
+	cards: (MonsterCardInterface | SpellCardInterface | TrapCardInterface)[];
+}) {
 	const [allCards, setAllCards] = useState(cards);
 	const [filteredCards, setFilteredCards] = useState(cards);
 

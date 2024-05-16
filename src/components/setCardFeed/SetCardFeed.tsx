@@ -26,7 +26,11 @@ import CardLink from "@/components/CardLink";
 // ** Import styles
 
 // ** Import Types
-import { SetCardInterface } from "@/types/cards.interface";
+import {
+	SetMonsterCardInterface,
+	SetSpellCardInterface,
+	SetTrapCardInterface,
+} from "@/types/cards.interface";
 
 /**
  * Renders a feed of set cards.
@@ -34,7 +38,15 @@ import { SetCardInterface } from "@/types/cards.interface";
  * @param cards - The array of cards to render.
  * @return The JSX element representing the set card feed.
  */
-export default function SetCardFeed({ cards }: { cards: SetCardInterface[] }) {
+export default function SetCardFeed({
+	cards,
+}: {
+	cards: (
+		| SetMonsterCardInterface
+		| SetSpellCardInterface
+		| SetTrapCardInterface
+	)[];
+}) {
 	return (
 		<div className="grid grid-cols-4 gap-x-2 gap-y-4">
 			{cards.map((card, index) => (
