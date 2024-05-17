@@ -77,7 +77,7 @@ export default function MonsterCardDetails({
 				return banned;
 			case "Limited":
 				return limited;
-			case "Semi-limited":
+			case "Semi-Limited":
 				return semiLimited;
 			default:
 				return banned;
@@ -89,9 +89,11 @@ export default function MonsterCardDetails({
 			<h1 className="text-2xl font-bold">{cardDetails.name}</h1>
 			<div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
 				<Image
-					src={cardPlaceholder}
+					src={`https://deckvault.b-cdn.net/card_images/small/${cardDetails.image_ids[0]}.webp`}
 					alt={cardDetails.name}
 					className="mx-auto rounded-sm"
+					width={813}
+					height={1185}
 				/>
 				<div className="grid grid-cols-2 content-start gap-2 text-sm">
 					<div className="flex h-8 items-center border border-gray-200 shadow-sm">

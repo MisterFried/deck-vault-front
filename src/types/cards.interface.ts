@@ -7,6 +7,7 @@ export interface CardBaseInterface {
 	description: string;
 	archetype: string | null;
 	banlist: "Unlimited" | "Limited" | "Semi-limited" | "Banned";
+	image_ids: number[];
 }
 
 // Monster card without any additional infos

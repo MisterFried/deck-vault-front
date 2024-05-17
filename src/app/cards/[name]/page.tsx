@@ -9,6 +9,8 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
+import MonsterCardDetails from "@/components/cardDetails/MonsterCardDetails";
+import SpellTrapCardDetails from "@/components/cardDetails/SpellTrapCardDetails";
 
 // ** Import state manager
 
@@ -32,8 +34,6 @@ import {
 	SpellCardWithPrintsInterface,
 	TrapCardWithPrintsInterface,
 } from "@/types/cards.interface";
-import MonsterCardDetails from "@/components/cardDetails/MonsterCardDetails";
-import SpellTrapCardDetails from "@/components/cardDetails/SpellTrapCardDetails";
 
 // TODO : Separate card info and card print in different components
 async function getCardInfo(name: string) {

@@ -19,7 +19,6 @@ import Image from "next/image";
 // ** Import utils / lib
 
 // ** Import assets
-import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
 
 // ** Import icons
 
@@ -44,7 +43,12 @@ export default function CardLink({
 			href={`/cards/${encodeURIComponent(card.name.toLowerCase().replaceAll(" ", "_"))}`}
 			className="flex flex-col"
 		>
-			<Image src={cardPlaceholder} alt={card.name} />
+			<Image
+				src={`https://deckvault.b-cdn.net/card_images/small/${card.image_ids[0]}.webp`}
+				alt={card.name}
+				width={268}
+				height={391}
+			/>
 			<span className="text-xs font-light">{card.name}</span>
 		</Link>
 	);
