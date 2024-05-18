@@ -1,5 +1,5 @@
 // ** Import core packages
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 // ** Import third party
@@ -19,19 +19,18 @@ import Link from "next/link";
 // ** Import utils / lib
 
 // ** Import assets
-import cardPlaceholder from "/public/placeholders/cardPlaceholder.jpg";
-import Spell from "/public/images/SPELL.svg";
-import Trap from "/public/images/TRAP.svg";
-import Continuous from "/public/images/Continuous.webp";
-import Counter from "/public/images/Counter.webp";
-import Equip from "/public/images/Equip.webp";
-import Field from "/public/images/Field.webp";
-import Normal from "/public/images/Normal.png";
-import QuickPlay from "/public/images/Quick-Play.webp";
-import Ritual from "/public/images/Ritual.webp";
-import banned from "/public/images/banned.svg";
-import limited from "/public/images/limited.svg";
-import semiLimited from "/public/images/semi-limited.svg";
+import Spell from "/public/images/misc/SPELL.svg";
+import Trap from "/public/images/misc/TRAP.svg";
+import Continuous from "/public/images/types/Continuous.webp";
+import Counter from "/public/images/types/Counter.webp";
+import Equip from "/public/images/types/Equip.webp";
+import Field from "/public/images/types/Field.webp";
+import Normal from "/public/images/types/Normal.png";
+import QuickPlay from "/public/images/types/Quick-Play.webp";
+import Ritual from "/public/images/types/Ritual.webp";
+import banned from "/public/images/banlist/banned.svg";
+import limited from "/public/images/banlist/limited.svg";
+import semiLimited from "/public/images/banlist/semi-limited.svg";
 
 // ** Import icons
 

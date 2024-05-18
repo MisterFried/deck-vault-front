@@ -18,10 +18,10 @@ import NavigationCard from "@/components/NavigationCard";
 // ** Import utils / lib
 
 // ** Import assets
-import cardsImage from "/public/images/cards.jpg";
-import setsImage from "/public/images/sets.jpg";
-import archetypesImage from "/public/images/archetypes.jpg";
-import banlistImage from "/public/images/banlist.jpg";
+import cardsImage from "/public/images/homepage/cards.jpg";
+import setsImage from "/public/images/homepage/sets.jpg";
+import archetypesImage from "/public/images/homepage/archetypes.jpg";
+import banlistImage from "/public/images/homepage/banlist.jpg";
 
 // ** Import icons
 

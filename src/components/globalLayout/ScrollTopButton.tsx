@@ -1,4 +1,4 @@
-							"use client";
+"use client";
 
 // ** Import core packages
 import { useEffect, useState } from "react";
