@@ -1,5 +1,4 @@
 // ** Import core packages
-import Link from "next/link";
 
 // ** Import third party
 
@@ -8,6 +7,7 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
+import SetYearGroup from "./SetYearGroup";
 
 // ** Import state manager
 
@@ -79,36 +79,7 @@ export default async function Sets() {
 
 			<section className="grid grid-cols-1 overflow-hidden rounded-sm border-t border-gray-300 bg-white shadow-sm">
 				{sets.map(({ year, sets }) => (
-					<details
-						key={year}
-						className="border-b border-l border-r border-gray-300 bg-white p-2 shadow-sm"
-					>
-						<summary className="cursor-pointer font-medium">
-							{year}
-						</summary>
-						<div className="flex flex-col gap-2">
-							{sets.map((set, index) => (
-								<article
-									className="grid grid-cols-[1fr_auto] rounded-sm border border-gray-300 bg-gray-50 p-1 shadow-sm"
-									key={`${set.code}-${index}`}
-								>
-									<Link
-										href={`/sets/${set.code}`}
-										className="justify-self-start text-lg font-medium"
-									>
-										{set.name}
-									</Link>
-									<span className="justify-self-end text-sm font-light">
-										{set.code}
-									</span>
-									<span className="justify-self-start text-sm font-light">{`${set.date.getUTCDate()}/${set.date.getUTCMonth() + 1}/${set.date.getUTCFullYear()}`}</span>
-									<span className="justify-self-end text-sm font-semibold">
-										{set.cards_amount} cards
-									</span>
-								</article>
-							))}
-						</div>
-					</details>
+					<SetYearGroup key={year} year={year} sets={sets} />
 				))}
 			</section>
 		</main>

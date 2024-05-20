@@ -32,6 +32,11 @@ details[open] summary {
 	background-color: rgb(240, 240, 240);
 }
 
+.banlistTab:nth-child(2) {
+	border-left: 0 !important;
+	border-right: 0 !important;
+}
+
 .banlistTab.active {
 	background-color: white;
 	border-bottom: none;
@@ -46,7 +51,7 @@ details[open] summary {
 	width: 0;
 	height: 2px;
 
-	background-color: red;
+	background-color: #162234;
 	transition: all ease-in-out 200ms;
 }
 

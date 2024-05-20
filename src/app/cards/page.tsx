@@ -7,7 +7,7 @@
 // ** Import sub pages / sections
 
 // ** Import components
-import CardDisplay from "@/components/cardFeed/CardDisplay";
+import CardFeed from "../../components/CardFeed";
 
 // ** Import state manager
 
@@ -26,28 +26,62 @@ import CardDisplay from "@/components/cardFeed/CardDisplay";
 // ** Import styles
 
 // ** Import Types
-import { MonsterCardInterface, SpellCardInterface, TrapCardInterface } from "@/types/cards.interface";
+import {
+	MonsterCardInterface,
+	SpellCardInterface,
+	TrapCardInterface,
+} from "@/types/cards.interface";
+
+// Types
+interface CardsResponseInterface {
+	total: number;
+	cards: (MonsterCardInterface | SpellCardInterface | TrapCardInterface)[];
+}
 
 /**
  * Retrieves the list of cards from the server.
  *
  * @return An array of CardInterface objects representing the cards.
  */
-async function getCards() {
-	const response = await fetch("http://localhost:3000/cards");
-	if (!response.ok) throw new Error(response.statusText);
+async function getCards(search: string, perPage: number, page: number) {
+	try {
+		const response = await fetch(
+			`http://localhost:3000/cards/${search}?page=${page}&perPage=${perPage}`
+		);
+		if (!response.ok) throw new Error(response.statusText);
 
-	const cards: (
-		| MonsterCardInterface
-		| SpellCardInterface
-		| TrapCardInterface
-	)[] = await response.json();
+		const results: CardsResponseInterface = await response.json();
 
-	return cards;
+		return results;
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-export default async function Cards() {
-	const cards = await getCards();
+/**
+ * Renders the Cards page, which displays a detailed list of existing cards in the YuGiOh TCG.
+ *
+ * @param searchParams - An optional object containing search parameters:
+ *   - search: A string representing the search term.
+ *   - perPage: A string representing the number of cards per page.
+ *   - page: A string representing the current page number.
+ * @return The Cards page component.
+ */
+export default async function Cards({
+	searchParams,
+}: {
+	searchParams?: { search?: string; perPage?: string; page?: string };
+}) {
+	const search = searchParams?.search ?? "";
+	const perPage = Number(searchParams?.perPage ?? "10");
+	const page = Number(searchParams?.page ?? "1");
+
+	const results = await getCards(search, perPage, page);
+
+	let totalPages = 0;
+	if (results) {
+		totalPages = Math.ceil(results.total / perPage);
+	}
 
 	return (
 		<main className="flex grow flex-col gap-4 p-2">
@@ -58,9 +92,11 @@ export default async function Cards() {
 				</p>
 			</section>
 
-			<section>
-				<CardDisplay cards={cards} />
-			</section>
+			{results ? (
+				<CardFeed cards={results.cards} totalPages={totalPages} />
+			) : (
+				<p>Something went wrong</p>
+			)}
 		</main>
 	);
 }

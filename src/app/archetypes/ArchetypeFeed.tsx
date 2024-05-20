@@ -8,7 +8,7 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
-import ArchetypeFeedInput from "./ArchetypeFeedInput";
+import QueryParamsInput from "../../components/QueryParamsInput";
 
 // ** Import state manager
 
@@ -34,7 +34,6 @@ import ArchetypeFeedInput from "./ArchetypeFeedInput";
  * @param archetypes - The array of archetype names to display.
  * @return The rendered ArchetypeFeed component.
  */
-
 export default function ArchetypeFeed({
 	archetypes,
 }: {
@@ -42,7 +41,7 @@ export default function ArchetypeFeed({
 }) {
 	return (
 		<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
-			<ArchetypeFeedInput />
+			<QueryParamsInput queryParams="search" />
 			<div className="grid grid-cols-1 border-t border-gray-300">
 				{archetypes.map(archetype => (
 					<Link

@@ -7,7 +7,8 @@
 // ** Import sub pages / sections
 
 // ** Import components
-import SetCardFeed from "@/components/setCardFeed/SetCardFeed";
+import SetVariantFeed from "./SetVariantFeed";
+import SetCardFeed from "./SetCardFeed";
 
 // ** Import state manager
 
@@ -106,26 +107,11 @@ export default async function Set({ params }: { params: { code: string } }) {
 					Perferendis.
 				</p>
 			</section>
+
 			{setBreakdown.variants.length > 1 && (
-				<section className="flex flex-col rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
-					<h2 className="text-xl font-semibold">Variants</h2>
-					<p className="mb-2 text-sm font-light">
-						Multiple variants of this sets exists. See the list
-						below for details.
-					</p>
-					<div className="flex flex-col">
-						{setBreakdown.variants.map((set, index) => (
-							<div
-								key={`${set.code}-${index}`}
-								className="grid grid-cols-[1fr_auto]"
-							>
-								<span className="font-medium">{set.name}</span>
-								<span className="text-sm font-light">{`${set.date.getUTCDate()}/${set.date.getUTCMonth() + 1}/${set.date.getUTCFullYear()}`}</span>
-							</div>
-						))}
-					</div>
-				</section>
+				<SetVariantFeed variants={setBreakdown.variants} />
 			)}
+
 			<section className="flex flex-col gap-2 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 				<div className="flex justify-between">
 					<h2 className="text-xl font-semibold">Cards</h2>
@@ -136,22 +122,11 @@ export default async function Set({ params }: { params: { code: string } }) {
 					)}
 				</div>
 				{setBreakdown.variants.map((variant, index) => (
-					<article
+					<SetCardFeed
 						key={index}
-						className="mb-6 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm last:mb-0"
-					>
-						{setBreakdown.variants.length > 1 && (
-							<div className="mb-2 flex justify-between">
-								<h3 className="font-semibold">
-									{variant.name}
-								</h3>
-								<span className="text-sm font-light">
-									Total : {variant.cards.length}
-								</span>
-							</div>
-						)}
-						<SetCardFeed cards={variant.cards} />
-					</article>
+						variant={variant}
+						variantCount={setBreakdown.variants.length}
+					/>
 				))}
 			</section>
 		</main>

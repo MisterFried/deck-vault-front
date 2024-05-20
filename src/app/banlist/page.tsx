@@ -7,7 +7,7 @@
 // ** Import sub pages / sections
 
 // ** Import components
-import BanlistTabs from "@/components/BanlistTabs";
+import BanlistFeed from "./BanlistFeed";
 
 // ** Import state manager
 
@@ -86,7 +86,12 @@ async function getBanlistCards() {
  *
  * @return The rendered Banlist page component.
  */
-export default async function Banlist() {
+export default async function Banlist({
+	searchParams,
+}: {
+	searchParams?: { status?: string };
+}) {
+	const activeStatus = searchParams?.status ?? "banned";
 	const cards = await getBanlistCards();
 
 	return (
@@ -98,7 +103,7 @@ export default async function Banlist() {
 					the YuGiOh TCG.
 				</p>
 			</section>
-			<BanlistTabs cards={cards} />
+			<BanlistFeed activeStatus={activeStatus} cards={cards} />
 		</main>
 	);
 }

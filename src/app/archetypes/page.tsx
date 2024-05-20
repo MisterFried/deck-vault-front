@@ -7,7 +7,7 @@
 // ** Import sub pages / sections
 
 // ** Import components
-import ArchetypeFeed from "@/components/ArchetypeFeed";
+import ArchetypeFeed from "./ArchetypeFeed";
 
 // ** Import state manager
 

@@ -30,29 +30,34 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 // ** Import Types
 
 /**
- * Render a search input for the ArchetypeFeed component.
- * This input updates the search parameter in the URL to display matching archetypes.
+ * Render a search input that updates the specified query parameter in the URL.
  *
- * @return The rendered ArchetypeFeedInput component.
+ * @return The rendered input component.
  */
-export default function ArchetypeFeedInput() {
+export default function QueryParamsInput({
+	queryParams,
+}: {
+	queryParams: string;
+}) {
 	const currentSearchParams = useSearchParams();
 	const pathname = usePathname();
 	const { replace } = useRouter();
 
 	function handleSearch(term: string) {
 		const newSearchParams = new URLSearchParams(currentSearchParams);
-		newSearchParams.set("search", term);
+		newSearchParams.set(queryParams, term);
 		replace(`${pathname}?${newSearchParams.toString()}`);
 	}
 
 	return (
 		<input
 			type="text"
-			className="w-full border border-gray-300 px-2 py-1"
+			className="w-full rounded-sm border border-gray-300 px-2 py-1"
 			placeholder="Search an archetype"
 			onChange={e => handleSearch(e.target.value)}
-			defaultValue={currentSearchParams.get("search")?.toString()}
+			defaultValue={
+				currentSearchParams.get(queryParams)?.toString() || ""
+			}
 		/>
 	);
 }

@@ -1,6 +1,4 @@
 // ** Import core packages
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
 
 // ** Import third party
 
@@ -9,8 +7,9 @@ import Link from "next/link";
 // ** Import sub pages / sections
 
 // ** Import components
-import MonsterCardDetails from "@/components/cardDetails/MonsterCardDetails";
-import SpellTrapCardDetails from "@/components/cardDetails/SpellTrapCardDetails";
+import MonsterCardDetails from "./MonsterCardDetails";
+import SpellTrapCardDetails from "./SpellTrapCardDetails";
+import PrintDetails from "./PrintDetails";
 
 // ** Import state manager
 
@@ -35,7 +34,12 @@ import {
 	TrapCardWithPrintsInterface,
 } from "@/types/cards.interface";
 
-// TODO : Separate card info and card print in different components
+/**
+ * Retrieves the card details for a given card name from the server.
+ *
+ * @param name - The name of the card.
+ * @return The card details with prints sorted by date.
+ */
 async function getCardInfo(name: string) {
 	// Get card details
 	const response = await fetch(`http://localhost:3000/cards/search/${name}`);
@@ -59,6 +63,12 @@ async function getCardInfo(name: string) {
 	return cardDetails;
 }
 
+/**
+ * Renders the card details page based on the provided name from the URL.
+ *
+ * @param params.name - The name of the card.
+ * @return The rendered card details page.
+ */
 export default async function Card({ params }: { params: { name: string } }) {
 	const cardDetails = await getCardInfo(params.name);
 
@@ -69,33 +79,7 @@ export default async function Card({ params }: { params: { name: string } }) {
 			) : (
 				<SpellTrapCardDetails cardDetails={cardDetails} />
 			)}
-			<section className="rounded-sm border border-gray-300 p-2 shadow-sm bg-white">
-				<h2 className="text-xl font-semibold">Prints</h2>
-				<p className="mb-6">
-					<b className="font-semibold">{cardDetails.name}</b> has been
-					print in {cardDetails.prints.length} sets. More details
-					below
-				</p>
-				<div className="flex flex-col gap-2">
-					{cardDetails.prints.map(print => (
-						<article
-							key={print.id}
-							className="grid grid-cols-[1fr_auto] gap-x-2 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm"
-						>
-							<Link href={`/sets/${print.set_code}`}>
-								{print.set_name}
-							</Link>
-							<span className="justify-self-end">
-								{print.rarity}
-							</span>
-							<span className="text-sm font-light">
-								{print.code}
-							</span>
-							<span className="justify-self-end text-sm font-light">{`${print.set_date.getUTCDate()}/${print.set_date.getUTCMonth() + 1}/${print.set_date.getUTCFullYear()}`}</span>
-						</article>
-					))}
-				</div>
-			</section>
+			<PrintDetails name={cardDetails.name} prints={cardDetails.prints} />
 		</main>
 	);
 }

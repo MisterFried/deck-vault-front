@@ -17,8 +17,10 @@ import Image from "next/image";
 // ** Import APIs
 
 // ** Import utils / lib
+import checkImageAvailability from "@/lib/checkImageAvailability";
 
 // ** Import assets
+import CardBack from "/public/images/misc/card-back.png";
 
 // ** Import icons
 
@@ -33,18 +35,33 @@ import {
 	TrapCardInterface,
 } from "@/types/cards.interface";
 
-export default function CardLink({
+/**
+ * Renders a Link component to the specified card.
+ *
+ * @param card - The card object.
+ * @return A link to the card with its image and name.
+ */
+export default async function CardLink({
 	card,
 }: {
 	card: MonsterCardInterface | SpellCardInterface | TrapCardInterface;
 }) {
+	const isImageAvailable = await checkImageAvailability(
+		String(card.image_ids[0]),
+		"small"
+	);
+
 	return (
 		<Link
 			href={`/cards/${encodeURIComponent(card.name.toLowerCase().replaceAll(" ", "_"))}`}
 			className="flex flex-col"
 		>
 			<Image
-				src={`https://deckvault.b-cdn.net/card_images/small/${card.image_ids[0]}.webp`}
+				src={
+					isImageAvailable
+						? `https://deckvault.b-cdn.net/card_images/small/${card.image_ids[0]}.webp`
+						: CardBack
+				}
 				alt={card.name}
 				width={268}
 				height={391}

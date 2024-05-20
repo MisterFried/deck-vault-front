@@ -17,6 +17,7 @@ import Link from "next/link";
 // ** Import APIs
 
 // ** Import utils / lib
+import checkImageAvailability from "@/lib/checkImageAvailability";
 
 // ** Import assets
 import Spell from "/public/images/misc/SPELL.svg";
@@ -31,6 +32,7 @@ import Ritual from "/public/images/types/Ritual.webp";
 import banned from "/public/images/banlist/banned.svg";
 import limited from "/public/images/banlist/limited.svg";
 import semiLimited from "/public/images/banlist/semi-limited.svg";
+import CardBack from "/public/images/misc/card-back.png";
 
 // ** Import icons
 
@@ -44,7 +46,7 @@ import {
 	TrapCardWithPrintsInterface,
 } from "@/types/cards.interface";
 
-export default function MonsterCardDetails({
+export default async function MonsterCardDetails({
 	cardDetails,
 }: {
 	cardDetails: SpellCardWithPrintsInterface | TrapCardWithPrintsInterface;
@@ -83,12 +85,21 @@ export default function MonsterCardDetails({
 		}
 	}
 
+	const isImageAvailable = await checkImageAvailability(
+		String(cardDetails.image_ids[0]),
+		"full"
+	);
+
 	return (
 		<section className="flex flex-col gap-4 rounded-sm border border-gray-300 bg-white p-2 shadow-sm">
 			<h1 className="text-2xl font-bold">{cardDetails.name}</h1>
 			<div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
 				<Image
-					src={`https://deckvault.b-cdn.net/card_images/small/${cardDetails.image_ids[0]}.webp`}
+					src={
+						isImageAvailable
+							? `https://deckvault.b-cdn.net/card_images/small/${cardDetails.image_ids[0]}.webp`
+							: CardBack
+					}
 					alt={cardDetails.name}
 					className="mx-auto rounded-sm"
 					width={813}
