@@ -52,12 +52,12 @@ async function getCardInfo(name: string) {
 
 	// Convert prints date from string to Date object
 	cardDetails.prints.forEach(print => {
-		print.set_date = new Date(print.set_date);
+		print.date = new Date(print.date);
 	});
 
 	// Sort prints by date
 	cardDetails.prints.sort(
-		(a, b) => b.set_date.getTime() - a.set_date.getTime()
+		(a, b) => b.date.getTime() - a.date.getTime()
 	);
 
 	return cardDetails;

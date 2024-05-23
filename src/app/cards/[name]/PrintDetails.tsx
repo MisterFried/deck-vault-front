@@ -55,12 +55,12 @@ export default function PrintDetails({
 						key={print.id}
 						className="grid grid-cols-[1fr_auto] gap-x-2 rounded-sm border border-gray-300 bg-gray-50 p-2 shadow-sm"
 					>
-						<Link href={`/sets/${print.set_code}`}>
-							{print.set_name}
+						<Link href={`/sets/${print.code.split("-")[0]}`}>
+							{print.setName}
 						</Link>
 						<span className="justify-self-end">{print.rarity}</span>
 						<span className="text-sm font-light">{print.code}</span>
-						<span className="justify-self-end text-sm font-light">{`${print.set_date.getUTCDate()}/${print.set_date.getUTCMonth() + 1}/${print.set_date.getUTCFullYear()}`}</span>
+						<span className="justify-self-end text-sm font-light">{`${print.date.getUTCDate()}/${print.date.getUTCMonth() + 1}/${print.date.getUTCFullYear()}`}</span>
 					</article>
 				))}
 			</div>

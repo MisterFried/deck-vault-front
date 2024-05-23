@@ -48,7 +48,7 @@ export default function SetLink({ set }: { set: SetInterface }) {
 			</span>
 			<span className="justify-self-start text-sm font-light">{`${set.date.getUTCDate()}/${set.date.getUTCMonth() + 1}/${set.date.getUTCFullYear()}`}</span>
 			<span className="justify-self-end text-sm font-semibold">
-				{set.cards_amount} cards
+				{set.cardsAmount} cards
 			</span>
 		</article>
 	);

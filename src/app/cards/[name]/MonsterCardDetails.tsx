@@ -166,7 +166,7 @@ export default async function MonsterCardDetails({
 	}
 
 	const isImageAvailable = await checkImageAvailability(
-		String(cardDetails.image_ids[0]),
+		String(cardDetails.images[0]),
 		"full"
 	);
 
@@ -177,7 +177,7 @@ export default async function MonsterCardDetails({
 				<Image
 					src={
 						isImageAvailable
-							? `https://deckvault.b-cdn.net/card_images/full/${cardDetails.image_ids[0]}.webp`
+							? `https://deckvault.b-cdn.net/card_images/full/${cardDetails.images[0]}.webp`
 							: CardBack
 					}
 					alt={cardDetails.name}

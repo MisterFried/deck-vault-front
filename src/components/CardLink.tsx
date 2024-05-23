@@ -47,7 +47,7 @@ export default async function CardLink({
 	card: MonsterCardInterface | SpellCardInterface | TrapCardInterface;
 }) {
 	const isImageAvailable = await checkImageAvailability(
-		String(card.image_ids[0]),
+		String(card.images[0]),
 		"small"
 	);
 
@@ -59,7 +59,7 @@ export default async function CardLink({
 			<Image
 				src={
 					isImageAvailable
-						? `https://deckvault.b-cdn.net/card_images/small/${card.image_ids[0]}.webp`
+						? `https://deckvault.b-cdn.net/card_images/small/${card.images[0]}.webp`
 						: CardBack
 				}
 				alt={card.name}

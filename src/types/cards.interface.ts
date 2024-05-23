@@ -7,7 +7,7 @@ export interface CardBaseInterface {
 	description: string;
 	archetype: string | null;
 	banlist: "Unlimited" | "Limited" | "Semi-limited" | "Banned";
-	image_ids: number[];
+	images: number[];
 }
 
 // Monster card without any additional infos
@@ -67,9 +67,8 @@ export interface CardPrintInterface {
 	id: number;
 	rarity: string;
 	code: string;
-	set_name: string;
-	set_code: string;
-	set_date: Date;
+	setName: string;
+	date: Date;
 }
 
 // Monster card with additional information about all its prints
