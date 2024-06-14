@@ -44,7 +44,7 @@ interface CardsResponseInterface {
  * @return An array of CardInterface objects representing the cards.
  */
 async function getCards(search: string, perPage: number, page: number) {
-  try {
+	try {
 		const response = await fetch(
 			`http://localhost:3000/cards/${search}?page=${page}&perPage=${perPage}`
 		);
@@ -92,7 +92,7 @@ export default async function Cards({
 					A detailed list of all the existing cards in the YuGiOh TCG.
 				</p>
 			</section>
-      <CardFeed cards={results.cards} totalPages={totalPages} />
+			<CardFeed cards={results.cards} totalPages={totalPages} />
 		</main>
 	);
 }

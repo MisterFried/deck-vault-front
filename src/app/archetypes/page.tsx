@@ -49,7 +49,7 @@ async function getArchetypes(term: string) {
 /**
  * Renders the Archetypes page, which displays a list of archetypes from the YuGiOh TCG.
  * @param searchParams - The search term to filter the list of archetypes.
- * 
+ *
  * @return The rendered Archetypes page.
  */
 export default async function Archetypes({

@@ -61,7 +61,10 @@ interface BanlistProps {
  * @param cards - The cards to be displayed in each tab.
  * @return The rendered tabbed component.
  */
-export default async function BanlistFeed({ activeStatus, cards }: BanlistProps) {
+export default async function BanlistFeed({
+	activeStatus,
+	cards,
+}: BanlistProps) {
 	return (
 		<section className="grid grid-cols-3">
 			<BanlistTab status="banned" />

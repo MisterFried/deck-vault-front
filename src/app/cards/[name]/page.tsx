@@ -56,9 +56,7 @@ async function getCardInfo(name: string) {
 	});
 
 	// Sort prints by date
-	cardDetails.prints.sort(
-		(a, b) => b.date.getTime() - a.date.getTime()
-	);
+	cardDetails.prints.sort((a, b) => b.date.getTime() - a.date.getTime());
 
 	return cardDetails;
 }
